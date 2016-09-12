@@ -6,6 +6,6 @@
         <title></title>
     </head>
     <body>
-        <h1>Em construção...</h1>
+        <h1>Site em construção...</h1>
     </body>
 </html>
