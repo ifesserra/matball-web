@@ -6,4 +6,6 @@ php:
     - 7.0
     - hhvm
 
-script: phpunit
+before_script: composer install
+
+script: phpunit --configuration tests/phpunit.xml
