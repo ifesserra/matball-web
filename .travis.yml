@@ -6,4 +6,7 @@ php:
     - 7.0
     - hhvm
 
-script: phpunit --configuration tests/phpunit.xml
+script: phpunit tests/Teste.php
+
+notifications:
+    slack: vlouzada-vvidigal:MgvOM0vlrNNiBBfMOJJWE8Jp
