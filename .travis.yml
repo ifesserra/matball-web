@@ -9,4 +9,5 @@ php:
 script: phpunit tests/Teste.php
 
 notifications:
+    email: false
     slack: vlouzada-vvidigal:MgvOM0vlrNNiBBfMOJJWE8Jp
