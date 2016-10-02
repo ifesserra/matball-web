@@ -1,6 +1,6 @@
 # matball-web
 Jogo MatBall. Parte WEB do Trabalho das disciplinas Engenharia de Software e Projeto de Sistemas
-Minimundo:
+<p>Minimundo:
 O projeto Matball tem como objetivo o desenvolvimento de um jogo onde o objetivo do jogo é o estouro do maior numero de balões possíveis.
 A dinâmica do jogo funciona da seguinte forma, cada balão possui uma questão de matemática e uma resposta, para estourar os balões é necessário selecionar a questão e sua respectiva resposta, para cada reposta certa os balões são estourados e a pontuação do jogador é aumentada, com o tempo a dificuldade das questões vão aumentando bem como a velocidade de subida dos balões, o termino do jogo acontece quando a quantidade de vidas acabam, sendo o total de 5 vidas, cada dupla de balão(questão e respectiva resposta) que subir até não ser vista mais na tela contará como 1 unidade de vida a menos.
 O jogo é capaz de criar grupos de usuários para competirem entre eles, ou seja, o grupo possui um ranking decrescente de pontuações, há três tipos de grupos, grupo oculto, esse grupo é oculto a todos os usuários, sendo permitida a entrada apenas para aqueles que foram convidados pelo administrador ou pelos moderadores, o outro tipo de grupo é o privado, ele permanece visível a todos os usuários porém a entrada é feita através de uma solicitação do próprio usuário, onde o administrador ou moderador decidirão se permitem a entrada do mesmo, outra forma de entrada é através do convite emitido pelos moderadores ou administrador do grupo, o terceiro tipo de grupo é o publico, esse é visível para todos os usuários e qualquer usuário pode ter acesso a ele, o jogo possui a opção de sair dos grupos ao qual você pertence.
@@ -8,4 +8,4 @@ Cada grupo possui um administrador e até 5 moderadores, o administrador é o cr
 Além dos rankings nos grupos existe o ranking geral, e tanto os grupos quanto o ranking geral possuem duas formas de serem vistos, pela ordem decrescente de pontuações de todos os usuários, onde a maior pontuação é a maior pontuação já feita, e a outra forma é pela ordem decrescente de pontuações diárias onde a maior pontuação é a maior pontuação feita naquele dia.
 O sistema possuirá um feedback onde o administrador ou o próprio usuário poderá ver onde mais errou e onde mais acertou.
 As questões são baseadas em operações aritméticas de soma, subtração, multiplicação e divisão, podendo até ser usada mais de uma operação em cada questão presente nos balões.
-O sistema deve ser capaz de cadastrar usuários, e permitir a criação de grupos, bem como formar o relatório de erros e acertos.
+O sistema deve ser capaz de cadastrar usuários, e permitir a criação de grupos, bem como formar o relatório de erros e acertos.<p>
