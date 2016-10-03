@@ -38,3 +38,4 @@ O sistema deve ser capaz de cadastrar usuários, e permitir a criação de grupo
 <li>As pontuações por ranking “Hoje” são feitas pelas melhores pontuações diárias em ordem decrescente.</li>
 <li>As pontuações por ranking “Geral” são feitas pelas melhores pontuações em ordem decrescente.</li>
 </ul>
+<p>Pitch:https://www.youtube.com/watch?v=LdL-VSqv7-k</p>
