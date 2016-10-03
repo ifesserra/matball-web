@@ -9,3 +9,32 @@ Além dos rankings nos grupos existe o ranking geral, e tanto os grupos quanto o
 O sistema possuirá um feedback onde o administrador ou o próprio usuário poderá ver onde mais errou e onde mais acertou.
 As questões são baseadas em operações aritméticas de soma, subtração, multiplicação e divisão, podendo até ser usada mais de uma operação em cada questão presente nos balões.
 O sistema deve ser capaz de cadastrar usuários, e permitir a criação de grupos, bem como formar o relatório de erros e acertos.<p>
+<p>Requisitos Funcionais<p>
+<ul>
+<li>O sistema deve permitir o cadastro de usuário.</li>
+<li>O sistema deve permitir a criação de grupos de usuários e o controle e gerenciamento do mesmo.</li>
+<li>O sistema deve permitir a solicitação, pelos usuários, de entrada em grupos.</li>
+<li>O sistema deve permitir a visualização do ranking de pontuação geral e do grupo (melhor, hoje).</li>
+<li>O sistema deve gerar um relatório de erros e acertos do usuário.</li>
+</ul>
+<p>Requisitos não funcionais<p>
+<ul>
+<li>O sistema deve controlar o acesso de usuários através de login e senha.</li>
+<li>O sistema de jogo deve ser desenvolvido para uma plataforma Web.</li>
+<li>A GUI do sistema deverá ser intuitiva.</li>
+<li>O sistema deve ser desenvolvido utilizando a linguagem php (web).</li>
+<li>A visualização de relatórios e dos rankings deverão ser pela web.</li>
+<li>O sistema deve armazenar a senha dos usuários de forma segura</li>
+<li>O sistema deve possuir uma SGBD</li>
+</ul>
+<p>Regras de negócio<p>
+<ul>
+<li>O criador do grupo será o administrador, tendo o controle de inclusão e exclusão sobre moderadores e usuários.</li>
+<li>Apenas o administrador pode transformar um usuário em moderador.</li>
+<li>Moderadores do grupo possuem o controle de inclusão e exclusão sobre usuários.</li>
+<li>Grupos públicos são vistos por todos, e todos os usuários possuem acesso livre a eles.</li>
+<li>Grupos privados são vistos por todos, mas o acesso é apenas com a permissão dos moderadores ou administrador.</li>
+<li>Grupos ocultos não são vistos por ninguém e o acesso se deve apenas por meio de convites feitos pelo administrador ou moderador.</li>
+<li>As pontuações por ranking “Hoje” são feitas pelas melhores pontuações diárias em ordem decrescente.</li>
+<li>As pontuações por ranking “Geral” são feitas pelas melhores pontuações em ordem decrescente.</li>
+</ul>
