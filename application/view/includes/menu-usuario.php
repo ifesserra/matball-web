@@ -8,10 +8,10 @@
 </li>
 
 <li>
-    <a href="list-diarios.php" id="btnDiarios">
+    <a href="list-diario.php" id="btnDiarios">
         <h4>
             <i class="fa fa-book"></i>
-            Diários
+            Diário
         </h4>
     </a>
 </li>

@@ -240,6 +240,11 @@ function dateToOrderDate(date){
     return date.replace(/(\d{2})\/(\d{2})\/(\d{4})/g, "$3$2$1");
 }
 
+// 2016-02-01 -> 01/02/2016
+function sqlDateToDate(date){
+    return date.replace(/(\d{4})-(\d{2})-(\d{2})/g, "$3/$2/$1");
+}
+
 function formatCPF(cpf){
     return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4");
 }
