@@ -22,12 +22,12 @@
 
 .name-page{
     font-size: 20px;
-    color: #111;
+    color: #198f90;
     font-family: 'Arial';
     font-weight: bold;
     margin: 10px 0 20px 0;
     padding: 10px;
-    background-color: #ddd;
+    background-color: #fff;
     border-radius: 0 0 15px 15px;
     text-shadow: 1px 1px 1px rgba(255, 255, 255, .6);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, .5);
@@ -35,37 +35,15 @@
 
 .form-group label{
     padding-top: 10px;
+    color: #198f90;
+}
+
+.form-group input{
+    color: #198f90;
 }
 
 .nowrap{
     white-space: nowrap;
-}
-
-.upload-msg {
-    text-align: center;
-    padding-top: 90px;
-    font-size: 22px;
-    color: #fff;
-    width: 100%;
-    height: 200px;
-    margin: 5px auto;
-    border: 1px solid #fff;
-}
-
-.form-control-file {
-    position: relative;
-    overflow: hidden;
-    margin: 10px;
-}
-
-.form-control-file {
-    color: #198f90;
-    border: 0;
-}
-
-.form-control-file:hover{
-    color: #fff;
-    background: #198f90;
 }
 
 .form-control-file input {

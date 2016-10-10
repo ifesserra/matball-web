@@ -6,7 +6,7 @@
 //    type:'square',
 //    funcOnLoad: function (){}
 // }
-function initCroppie(opt) {
+function initCroppie(opt, selectorPreview, selectorCroppie) {
     var uploadCrop = new Croppie(document.getElementById('imgUpload'), {
         viewport: {
             width: opt.width,
@@ -28,8 +28,8 @@ function initCroppie(opt) {
                     orientation: 0
                 });
 
-                $('.upload-msg').hide();
-                $('#croppie').show();
+                $(selectorPreview).hide();
+                $(selectorCroppie).show();
 
                 opt.funcOnLoad();
             };

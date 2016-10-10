@@ -32,9 +32,10 @@ try{
 
     include_once './controller/' . $call->service . '.class.php';
 
-    $service = new $call->service();
-    $service->process($call->operation, $call->object);
-    $service->sendResponse();
+    $controller = new $call->service();
+    $reflectionMethod = new ReflectionMethod($call->service, $call->operation);
+    $reflectionMethod->invoke($controller, $call->object);
+    $controller->sendResponse();
 } catch (Exception $e){
     exit($e->getMessage());
 }

@@ -36,6 +36,4 @@ abstract class Controller {
         echo($json);
         return $json;
     }
-
-    public abstract function process($operation, $object);
 }

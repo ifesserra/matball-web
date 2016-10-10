@@ -101,6 +101,29 @@ if(RestrictedSession::isLogged()){
             background-size: cover;
         }
         
+        .upload-msg {
+            text-align: center;
+            padding-top: 90px;
+            font-size: 22px;
+            color: #fff;
+            width: 100%;
+            height: 200px;
+            margin: 5px auto;
+            border: 1px solid #fff;
+        }
+
+        .form-control-file {
+            position: relative;
+            overflow: hidden;
+            margin: 10px;
+            color: #198f90;
+            border: 0;
+        }
+        
+        .form-control-file:hover{
+            color: #fff;
+            background: #198f90;
+        }
     </style>
 </head>
 
@@ -199,17 +222,37 @@ if(RestrictedSession::isLogged()){
                     </div>
                     
                     <div id="divEnviarFoto" class="col-md-12" style="padding-top: 20px;">
-                        <?php include "./includes/div-croppie.php" ?>
+                        <div>
+                            <div id="croppie">
+                                <div class="aln-center">
+                                    <i class="glyphicon glyphicon-arrow-left btn-rotate"  data-deg="-90" style="padding-right: 100px;"></i>
+                                    <i class="glyphicon glyphicon-arrow-right btn-rotate" data-deg="90"></i>
+                                </div>
+                                <div id="imgUpload" style="padding: 10px;"></div>
+                            </div>
+
+                            <div class="upload-msg">
+                                Foto não Carregada
+                            </div>
+                        </div>
+
+                        <div class="aln-center">
+                            <div class="form-control-file btn btn-default">
+                                <span class="fa fa-upload"></span>
+                                &nbsp;
+                                <span>Carregar uma Foto</span>
+                                <input type="file" id="upload" accept="image/*" />
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="col-xs-12 aln-right" style="margin: 50px 0 50px 0;">
-                        <button id='btnCancel' type="button" class="btn btn-warning">
-                            <i class="glyphicon glyphicon-floppy-remove"></i></i>&nbsp;
+                        <button id='btnCancel' type="button" class="btn btn-default">
                             Cancelar
                         </button>
 
                         <button id='btnSave' type="submit" class="btn btn-primary">
-                            <i class="glyphicon glyphicon-floppy-saved"></i>&nbsp;
+                            <i class="glyphicon glyphicon-ok"></i>&nbsp;
                             Enviar
                         </button>
                     </div>
@@ -249,7 +292,7 @@ if(RestrictedSession::isLogged()){
                     funcOnLoad: function (){
                         selectImg = true;
                     }
-                });
+                }, '.upload-msg', '#croppie');
                 
                 $('#croppie').hide();
                 
@@ -285,7 +328,7 @@ if(RestrictedSession::isLogged()){
                     showMessage('Carregue uma foto de perfil.', 'danger');
                     return false;
                 }
-                debugger;
+                
                 sendPostService(
                     '../Receiver.php',
                     'Usuarios', 'insert', object,

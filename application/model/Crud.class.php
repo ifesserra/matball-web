@@ -60,7 +60,7 @@ abstract class Crud{
     // Retorna o número de linhas afetadas
     public static function delete($arrayPkValue){
         $sql = "DELETE FROM " . static::$table . " WHERE " . self::makeLogicalExpression($arrayPkValue);
-        return DB::getInstance()->exec($sql);
+        return self::sqlExec($sql);
     }
     
     // Métodos de pesquisa
@@ -106,15 +106,8 @@ abstract class Crud{
     
     
     public static function sqlExec($sql){
-        $statement = DB::prepare($sql);
-        
-        // Retorna o ID ou número de linhas afetadas
-        if($statement->execute())
-            return DB::lastInsertId();
-        else
-            return null;
+        return DB::getInstance()->exec($sql);
     }
-    
     
     public static function makeLogicalExpression($arrayFieldValue, $and = true){
         $operator = $and ? 'AND':'OR';

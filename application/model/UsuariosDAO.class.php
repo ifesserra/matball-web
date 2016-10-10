@@ -14,22 +14,44 @@ class UsuariosDAO extends Crud{
         return null;
     }
     
-    public static function insertFoto($id, $base64Img){
-        $urlFoto = "data/fotos/$id.png";
+    public static function saveFoto($nameFile, $base64Img){
         $root = dirname(__DIR__, 2);
+        $dir = "$root/data/fotos";
         
-        if(!file_exists("$root/data/fotos")){
-            if(!file_exists("$root/data")){
-                mkdir("$root/data");
+        if(!file_exists($dir)){
+            if(!file_exists(dirname($dir))){
+                mkdir(dirname($dir));
             }
             
-            mkdir("$root/data/fotos");
+            mkdir($dir);
         }
 
-        if(Functions::base64Img2Png($base64Img, "$root/$urlFoto")){
+        if(Functions::base64Img2Png($base64Img, "$dir/$nameFile")){
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public static function insertFoto($id, $base64Img){
+        $nameFile = "$id.png";
+        $urlFoto = "data/fotos/$nameFile";
+
+        if(self::saveFoto($nameFile, $base64Img)){
             return parent::update(['id' => $id], ['url_foto' => $urlFoto]);
         }
         
         return 0;
+    }
+    
+    public static function findByIdJoinLocal($id){
+        return parent::sqlFetch(
+            "SELECT u.id, u.nome, u.email, u.login, u.url_foto, u.senha,".
+                   "DATE_FORMAT(u.dt_nascimento, '%d/%m/%Y') AS dt_nascimento, ".
+                   "u.escola, u.tipo_escola, l.pais, l.estado, l.cidade ".
+            "FROM usuarios AS u " .
+            "LEFT JOIN locais AS l ON l.id = u.local_id ".
+            "WHERE u.id = $id"
+        );
     }
 }

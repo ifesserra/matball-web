@@ -96,7 +96,7 @@ if(RestrictedSession::isLogged()){
                             Cancelar
                         </a>
                         
-                        <a type="submit" id="btnConfirm" href="#" class="btn btn-default">
+                        <a type="submit" id="btnConfirm" href="#" class="btn btn-primary">
                             <i class="fa fa-sign-in"></i>&nbsp;
                             Entrar
                         </a>
