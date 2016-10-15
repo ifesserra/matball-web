@@ -1,6 +1,6 @@
 <?php
 $ROOT = dirname(__DIR__, 2);
-require_once "$ROOT/application/model/UsuariosDAO.class.php";
+require_once "$ROOT/application/dao/UsuariosDAO.class.php";
 
 class RestrictedSession{
     

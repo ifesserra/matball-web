@@ -1,6 +1,6 @@
 <?php
 $ROOT = dirname(__DIR__, 2);
-require_once "$ROOT/controller/RestrictedSession.class.php";
+require_once "$ROOT/processes/RestrictedSession.class.php";
     
 if(!RestrictedSession::isLogged()){
     header("Location: http://" . $_SERVER['HTTP_HOST'] . '/matball-web');

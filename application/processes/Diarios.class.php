@@ -1,7 +1,7 @@
 <?php
 
 include_once 'Controller.class.php';
-require_once "$ROOT/application/model/DiariosDAO.class.php";
+require_once "$ROOT/application/dao/DiariosDAO.class.php";
 
 class Diarios extends Controller{
     function __construct() {

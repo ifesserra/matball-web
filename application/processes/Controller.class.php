@@ -26,14 +26,13 @@ abstract class Controller {
         $this->object = [];
     }
     
-    public function sendResponse(){
+    public function getResponse(){
         $this->response = [];
         $this->response['cd_message'] = $this->cdMessage;
         $this->response['message'] = $this->message;
         $this->response['object'] = $this->object;
         
         $json = json_encode($this->response);
-        echo($json);
         return $json;
     }
 }

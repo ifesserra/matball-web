@@ -1,5 +1,5 @@
 <?php
-require_once "application/controller/RestrictedSession.class.php";
+require_once "application/processes/RestrictedSession.class.php";
     
 if(RestrictedSession::isLogged()){
     header("Location: http://" . $_SERVER['HTTP_HOST'] . "/matball-web/application/view/home-usuario.php");

@@ -3,9 +3,9 @@
 include_once 'Controller.class.php';
 include_once 'RestrictedSession.class.php';
 
-require_once "$ROOT/application/model/UsuariosDAO.class.php";
-require_once "$ROOT/application/model/LocaisDAO.class.php";
-require_once "$ROOT/application/model/RecordesDAO.class.php";
+require_once "$ROOT/application/dao/UsuariosDAO.class.php";
+require_once "$ROOT/application/dao/LocaisDAO.class.php";
+require_once "$ROOT/application/dao/RecordesDAO.class.php";
 
 class Usuarios extends Controller{
     function __construct() {
