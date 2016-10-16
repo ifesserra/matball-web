@@ -11,6 +11,16 @@ var modalConfirm = {
 
 // type: success | info | warning | danger
 function showMessage(message, type, funcOnClosed, argument){
+    if(modalLoad !== null){
+        if(modalLoad.getState() !== 'closed'){
+            setTimeout(
+                function (){
+                    showMessage(message, type, funcOnClosed, argument);
+                }, 100);
+            return false;
+        }
+    }
+    
     if(modalMessage === null)
         modalMessage = $('#modalMessage').remodal(modalOptions);
     
@@ -61,20 +71,35 @@ function showLoad(message){
 }
 
 function hideLoad(){
-    if(modalLoad.getState() === 'opening'){
-        setTimeout(hideLoad, 500);
-    }
-    else{
-        modalLoad.close();
+    if(modalLoad !== null && modalLoad.getState() !== 'closed'){
+        if(modalLoad.getState() === 'opening'){
+            setTimeout(hideLoad, 100);
+        }
+        else{
+            modalLoad.close();
+        }
     }
 }
 
+function modalConfirmAction(f){
+    if(modalConfirm.modal.getState() === 'opened'){
+        modalConfirm.modal.close();
+    }
+    
+    if(modalConfirm.modal.getState() === 'closing'){
+        setTimeout(modalConfirmAction, 100, f);
+        return false;
+    }
+    
+    f();
+}
+
 $('#modalConfirm .confirm-yes').click(function (){
-    modalConfirm.yes();
+    modalConfirmAction(modalConfirm.yes);
 });
 
 $('#modalConfirm .confirm-no').click(function (){
-    modalConfirm.no();
+    modalConfirmAction(modalConfirm.no);
 });
 // ---
 
@@ -129,6 +154,8 @@ function sendPostService(url, service, operation, object, funcSuccess, funcError
             console.log(r);
             r = jQuery.parseJSON(r);
             
+            hideLoad();
+            
             // Success = 0 (No Message)
             // Success = 1000 - 1999
             // Info    = 2000 - 2999
@@ -149,6 +176,7 @@ function sendPostService(url, service, operation, object, funcSuccess, funcError
             }
         },
         error: function(){
+            hideLoad();
             if(funcError !== undefined)
                 funcError(null);
         }

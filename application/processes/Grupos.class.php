@@ -54,4 +54,32 @@ class Grupos extends Controller{
     public function listByUser($object) {
         $this->object = GruposDAO::getAllByUser($object->usuario_id);
     }
+    
+    public function listAllVisible($object) {
+        $this->object = GruposDAO::getAllVisible();
+    }
+    
+    public function addMember($object) {
+        try{
+            GruposUsuariosDAO::insert([
+                'grupo_id' => $object->grupo_id,
+                'usuario_id' => $object->usuario_id,
+                Functions::sqlCurrentTimeStamp()
+            ]);
+
+            $this->cdMessage = Controller::MESSAGE_SUCCESS;
+            $this->message = "Agora você é membro desse grupo!";
+            
+        } catch (Exception $ex){
+            $this->cdMessage = Controller::MESSAGE_DANGER;
+            if($ex->getCode() == 23000){
+                if(strpos($ex->getMessage(), 'constraint violation')){
+                    $this->message = "Você já é membro desse grupo!";
+                }
+            }
+            else{
+                $this->message = $ex->getMessage();
+            }
+        }
+    }
 }

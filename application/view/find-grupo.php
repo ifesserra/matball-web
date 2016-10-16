@@ -20,15 +20,9 @@
     }
 </style>
 
-<div class="name-page">Meus Grupos</div>
+<div class="name-page">Localizar Grupo</div>
 
 <div class="row">
-    <div class="col-xs-12 aln-right margin-bottom-15">
-        <a href="add-grupo.php" class="btn btn-primary">
-            <i class="fa fa-users"></i>
-            <strong>Criar Grupo</strong>
-        </a>
-    </div>
     
     <div class="col-xs-12">
         <input id="usuario_id" type="hidden"
@@ -41,9 +35,6 @@
                     <th class="aln-center">Nome</th>
                     <th class="aln-center">Tipo</th>
                     <th class="aln-center">Dono</th>
-                    <th class="aln-center">Criação</th>
-                    <th class="aln-center">Entrada</th>
-                    <th class="aln-center">Moderador</th>
                     <th class="aln-center">Membros</th>
                     <th class="aln-center"></th>
                 </tr>
@@ -61,6 +52,6 @@
 <script src="../../assets/external/data-tables-responsive/js/responsive.bootstrap.min.js" type="text/javascript"></script>
 
 <script src="../../assets/js/descriptions.js" type="text/javascript"></script>
-<script src="../../assets/js/list-grupos.js" type="text/javascript"></script>
+<script src="../../assets/js/find-grupo.js" type="text/javascript"></script>
 
 <?php include "./includes/page-footer.php" ?>

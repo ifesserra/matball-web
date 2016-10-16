@@ -44,7 +44,7 @@
 </li>
 
 <li>
-    <a href="find-grupos.php" id="btnFindGrupos">
+    <a href="find-grupo.php" id="btnFindGrupos">
         <h4>
             <i class="fa fa-search"></i>
             Localizar Grupo
