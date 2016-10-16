@@ -19,7 +19,7 @@ function loadTable(){
                     row.append($("<td class='aln-center' data-order='" + o.grupo_tipo + "'><i class='fa-2x " + 
                             DESCRIPTIONS.getGroupIcon(parseInt(o.grupo_tipo)) + "'></i></td>"));
 
-                    row.append($("<td class='aln-center'>" + o.administrador_nome + "</td>"));
+                    row.append($("<td class='aln-center'>" + o.administrador_login + "</td>"));
 
                     row.append($("<td class='aln-center' data-order='" + 
                             o.dt_solicitacao.replace(/-/g, '') + "'>" + 

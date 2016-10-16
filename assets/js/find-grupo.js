@@ -51,12 +51,14 @@ function loadTable(){
             dataTable = toDataTable('#listTable', {orderable: false, "targets": 4}, [ 0, "asc" ]);
 
             $("[group-request]").click(function (){
-                confirmRequest($(this).attr('group-request'));
+                confirmAction("Você confirma a solicitação de entrada no grupo?",
+                    sendRequest, $(this).attr('group-request'));
                 return false;
             });
 
             $("[group-enter]").click(function (){
-                confirmEnter($(this).attr('group-enter'));
+                confirmAction("Você confirma a entrada nesse grupo?", 
+                    sendEnter, $(this).attr('group-enter'));
                 return false;
             });
 
@@ -74,11 +76,6 @@ function confirmAction(msg, func, grupo_id){
             "Não", function (){});
 }
 
-function confirmRequest(grupo_id){
-    confirmAction("Você confirma a solicitação de entrada no grupo?",
-        sendRequest, grupo_id);
-}
-
 function sendRequest(object){
     showLoad("Enviando Solicitação...");
 
@@ -88,11 +85,6 @@ function sendRequest(object){
         function(){},
         function(){}
     );
-}
-
-function confirmEnter(grupo_id){
-    confirmAction("Você confirma a entrada nesse grupo?", 
-        sendEnter, grupo_id);
 }
 
 function sendEnter(object){

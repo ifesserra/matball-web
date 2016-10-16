@@ -5,19 +5,7 @@
 <link href="../../assets/external/data-tables-responsive/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
 <style>
-    .acertos{
-        text-align: center;
-        font-size: 16px;
-        font-weight: bold;
-        color: #00f;
-    }
-    
-    .erros{
-        text-align: center;
-        font-size: 16px;
-        font-weight: bold;
-        color: #f00;
-    }
+
 </style>
 
 <div class="name-page">Localizar Grupo</div>

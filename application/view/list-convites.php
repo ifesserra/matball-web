@@ -5,10 +5,12 @@
 <link href="../../assets/external/data-tables-responsive/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
 <style>
-
+    [reject]{
+        margin-right: 5px;
+    }
 </style>
 
-<div class="name-page">Solicitações Pendentes</div>
+<div class="name-page">Convites Pendentes</div>
 
 <div class="row">
     
@@ -23,7 +25,7 @@
                     <th class="aln-center">Grupo</th>
                     <th class="aln-center">Tipo</th>
                     <th class="aln-center">Dono</th>
-                    <th class="aln-center">Data Solicitação</th>
+                    <th class="aln-center">Data Convite</th>
                     <th class="aln-center"></th>
                 </tr>
             </thead>
@@ -40,6 +42,6 @@
 <script src="../../assets/external/data-tables-responsive/js/responsive.bootstrap.min.js" type="text/javascript"></script>
 <script src="../../assets/js/descriptions.js" type="text/javascript"></script>
 
-<script src="../../assets/js/list-solicitacoes.js" type="text/javascript"></script>
+<script src="../../assets/js/list-convites.js" type="text/javascript"></script>
 
 <?php include "./includes/page-footer.php" ?>
