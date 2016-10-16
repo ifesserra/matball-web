@@ -55,7 +55,7 @@ class Usuarios extends Controller{
                 Functions::date2sqlDate($object->dt_nascimento), '', $local_id,
                 $object->escola, $object->tipo_escola, Functions::sqlCurrentTimeStamp()]);
 
-            if(empty($id) || RecordesDAO::insert([$id, 0, 0, 0, 0]) == NULL){
+            if(empty($id) || RecordesDAO::insert([$id, 0, 0, 0, 0], false) == NULL){
                 throw new Exception("ERRO ao realizar o cadastro");
             }
 
