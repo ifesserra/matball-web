@@ -6,7 +6,17 @@ php:
     - 7.0
     - hhvm
 
-script: phpunit tests/Teste.php
+jdk:
+  - oraclejdk8
+addons:
+  apt:
+    packages:
+      - oracle-java8-installer
+  sonarqube: true
+
+script: 
+ - phpunit tests/Teste.php
+ - sonar-scanner
 
 notifications:
     email: false
