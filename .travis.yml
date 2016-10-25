@@ -14,6 +14,9 @@ addons:
       - oracle-java8-installer
   sonarqube: true
 
+before_script:
+  - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+
 script: 
  - phpunit tests/Teste.php
  - sonar-scanner
