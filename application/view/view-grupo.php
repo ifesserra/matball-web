@@ -44,6 +44,28 @@
     </div>
 </div>
 
+<div class="name-page margin-top-20">Solicitações Pendentes</div>
+
+<div class="row">
+    
+    <div class="col-xs-12">        
+        <table id='tbRequests' class="table table-striped table-bordered dt-responsive" 
+               cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th class="aln-center">Usuário</th>
+                    <th class="aln-center">Login</th>
+                    <th class="aln-center">Dt Solicitação</th>
+                    <th class="aln-center"></th>
+                </tr>
+            </thead>
+            
+            <tbody></tbody>
+
+        </table>
+    </div>
+</div>
+
 <script src="../../assets/external/data-tables/js/jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="../../assets/external/data-tables/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
 <script src="../../assets/external/data-tables-responsive/js/dataTables.responsive.min.js" type="text/javascript"></script>

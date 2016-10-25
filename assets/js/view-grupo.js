@@ -3,7 +3,8 @@ $(document).ready(function (){
     var grupo_id = $('#grupo_id').val();
     showLoad("Carregando...");
     loadTbUsers(usuario_id, grupo_id);
-
+    loadTbRequests(grupo_id);
+    hideLoad();
 });
 
 var dataTableUsers;
@@ -42,8 +43,76 @@ function loadTbUsers(usuario_id, grupo_id){
             );
 
             dataTableUsers = toDataTable('#tbUsers', {orderable: false, "targets": 7}, [ 0, "asc" ]);
+        },
+        function (){}
+    );
+}
 
-            hideLoad();
+var dataTableRequests;
+function loadTbRequests(grupo_id){
+    var object = {grupo_id: grupo_id};
+
+    sendPostService(
+        '../Receiver.php',
+        'Solicitacoes', 'listByGroup', object,
+        function(r){
+            loadListTable(null, '#tbRequests', r.object, 
+                function (row, o){
+                    row.append($("<td class='aln-center text-highlight'>" + o.nome + "</td>"));
+                    row.append($("<td class='aln-center text-highlight'>" + o.login + "</td>"));
+
+                    row.append($("<td class='aln-center' data-order='" + 
+                            o.dt_solicitacao.replace(/-/g, '') + "'>" + 
+                            sqlDateToDate(o.dt_solicitacao) + "</td>"));
+
+                    var btnAccept = "<button type='button' " + 
+                            "class='btn btn-primary' title='Aceitar' accept=" + o.id + ">" + 
+                            '<i class="glyphicon glyphicon-thumbs-up"></i>';
+                    
+                    var btnReject = "<button type='button' " + 
+                            "class='btn btn-danger' title='Rejeitar' reject=" + o.id + ">" + 
+                            '<i class="glyphicon glyphicon-thumbs-down"></i>';
+
+                    row.append($("<td class='aln-center nowrap' style='width: 50px;'>" + btnReject + btnAccept + "</td>"));
+                }
+            );
+
+            dataTableRequests = toDataTable('#tbRequests', {orderable: false, "targets": 3}, [ 2, "asc" ]);
+            
+            $("[accept]").click(function (){
+                confirmActionRequest("Aceitar a solicitação desse usuário?", "accept",
+                        $(this).attr('accept'));
+                return false;
+            });
+            
+            $("[reject]").click(function (){
+                confirmActionRequest("Rejeitar a solicitação desse usuário?", "reject",
+                        $(this).attr('reject'));
+                return false;
+            });
+
+        },
+        function (){}
+    );
+}
+
+function confirmActionRequest(msg, operation, usuario_id){
+    showConfirm(msg, "Sim",  
+            function (){ 
+                sendOperation(operation, 
+                    {usuario_id: usuario_id, grupo_id: $('#grupo_id').val()});
+            },
+            "Não", function (){});
+}
+
+function sendOperation(operation, object){
+    showLoad("Processando...");
+
+    sendPostService(
+        '../Receiver.php',
+        'Solicitacoes', operation, object,
+        function(r){
+            window.location = r.object.link;
         },
         function (){}
     );

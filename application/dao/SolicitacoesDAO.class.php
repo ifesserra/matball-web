@@ -18,4 +18,15 @@ class SolicitacoesDAO extends Crud{
                 "WHERE s.usuario_id = $usuario_id"
         );
     }
+    
+    public static function getAllByGroup($grupo_id){
+        return parent::sqlFetchAll(
+                "SELECT u.id AS id, u.nome AS nome, u.login AS login, ".
+                "  DATE_FORMAT(dthr_solicitacao, '%Y-%m-%d') AS dt_solicitacao ".
+                "FROM solicitacoes as s ".
+                "INNER JOIN usuarios AS u ".
+                "  ON u.id = s.usuario_id ".
+                "WHERE s.grupo_id = $grupo_id"
+        );
+    }
 }

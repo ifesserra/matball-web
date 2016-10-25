@@ -58,4 +58,64 @@ class Solicitacoes extends Controller{
             }
         }
     }
+    
+    public function listByGroup($object) {
+        $this->object = SolicitacoesDAO::getAllByGroup($object->grupo_id);
+    }
+    
+    public function reject($object) {
+        try{
+            if(SolicitacoesDAO::delete([
+                'grupo_id' => $object->grupo_id,
+                'usuario_id' => $object->usuario_id]) == 0){
+                throw new Exception("ERRO: Não foi possível rejeitar a solicitação!");
+            }
+
+            $this->cdMessage = Controller::MESSAGE_SUCCESS;
+            $this->message = "Solicitação rejeitada.";
+            $this->object['link'] = "view-grupo.php?id=$object->grupo_id";
+            
+        } catch (Exception $e){
+            $this->cdMessage = Controller::MESSAGE_DANGER;
+            $this->message = $e->getMessage();
+        }
+    }
+    
+    public function accept($object) {
+        try{
+            if(!GruposDAO::isMember($object->grupo_id, $object->usuario_id)){
+                if(!DB::beginTransaction()){
+                    throw new Exception ("ERRO ao aceitar a solicitação!");
+                }
+                
+                GruposUsuariosDAO::insert([
+                    'grupo_id' => $object->grupo_id,
+                    'usuario_id' => $object->usuario_id,
+                    Functions::sqlCurrentTimeStamp()
+                ]);
+            }
+            
+            if(SolicitacoesDAO::delete([
+                'grupo_id' => $object->grupo_id,
+                'usuario_id' => $object->usuario_id]) == 0){
+                throw new Exception("ERRO: Não foi possível excluir a solicitação!");
+            }
+            
+            if(DB::inTransaction() && !DB::commit()){
+                throw new Exception ("ERRO ao aceitar a solicitação!");
+            }
+
+            $this->cdMessage = Controller::MESSAGE_SUCCESS;
+            $this->message = "A solicitação foi aceita.";
+            $this->object['link'] = "view-grupo.php?id=$object->grupo_id";
+            
+        } catch (Exception $e){
+            $this->cdMessage = Controller::MESSAGE_DANGER;
+            $this->message = $e->getMessage();
+            
+            if(DB::inTransaction()){
+                DB::rollBack();
+            }
+        }
+    }
 }
