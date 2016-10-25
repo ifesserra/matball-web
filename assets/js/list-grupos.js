@@ -39,7 +39,7 @@ function loadTable(){
 
                     row.append($("<td class='aln-center text-highlight'>" + o.grupo_membros + "</td>"));
 
-                    row.append($("<td class='aln-center'><a href='view-grupo?id=" + o.grupo_id + 
+                    row.append($("<td class='aln-center'><a href='view-grupo.php?id=" + o.grupo_id + 
                                     "' class='btn btn-primary' title='Visualizar'><i class='glyphicon glyphicon-search'></i>" +
                                 "</td>"));
                 }

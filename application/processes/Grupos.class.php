@@ -32,7 +32,7 @@ class Grupos extends Controller{
 
             $this->cdMessage = Controller::MESSAGE_SUCCESS;
             $this->message = "Seu grupo foi criado com sucesso!";
-            $this->object['link'] = 'list-grupos.php';
+            $this->object['link'] = "view-grupo.php?id=$id";
 
         } catch (Exception $ex) {
             $this->cdMessage = Controller::MESSAGE_DANGER;
@@ -81,5 +81,9 @@ class Grupos extends Controller{
                 $this->message = $ex->getMessage();
             }
         }
+    }
+
+    public function listUsersOfGroup($object) {
+        $this->object = GruposDAO::getUsersOfGroup($object->grupo_id);
     }
 }

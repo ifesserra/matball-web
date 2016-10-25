@@ -49,4 +49,19 @@ class GruposDAO extends Crud{
         
         return true;
     }
+
+    public static function getUsersOfGroup($grupo_id){
+        return parent::sqlFetchAll(
+                "SELECT u.id AS membro_id, u.login AS membro_login,".
+                "  DATE_FORMAT(gu.dthr_insert, '%Y-%m-%d') AS membro_desde,".
+                "  DATE_FORMAT(r.dthr_pontos_max, '%Y-%m-%d') AS dthr_pontos_max, r.pontos_max,".
+                "  DATE_FORMAT(r.dthr_nivel_max, '%Y-%m-%d') AS dthr_nivel_max , r.nivel_max ".
+                "FROM grupos_usuarios AS gu ".
+                "INNER JOIN grupos AS g ON g.id = gu.grupo_id ".
+                "INNER JOIN usuarios AS u ON u.id = gu.usuario_id ".
+                "INNER JOIN recordes AS r ON r.usuario_id = u.id ".
+                "WHERE gu.grupo_id = $grupo_id ".
+                "ORDER BY r.pontos_max DESC, r.nivel_max DESC, r.dthr_pontos_max ASC, r.dthr_nivel_max ASC"
+        );
+    }
 }

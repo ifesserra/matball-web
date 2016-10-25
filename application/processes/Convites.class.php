@@ -66,4 +66,33 @@ class Convites extends Controller{
             }
         }
     }
+    
+    public function insert($object) {
+        try{
+            if(GruposDAO::isMember($object->grupo_id, $object->usuario_id)){
+                throw new Exception("Esse usuário já é membro do grupo!");
+            }
+            
+            ConvitesDAO::insert([
+                'grupo_id' => $object->grupo_id,
+                'usuario_id' => $object->usuario_id,
+                Functions::sqlCurrentTimeStamp()
+            ]);
+
+            $this->cdMessage = Controller::MESSAGE_SUCCESS;
+            $this->message = "Convite enviado com sucesso!";
+            $this->object['link'] = "view-grupo.php?id=$object->grupo_id";
+            
+        } catch (Exception $ex){
+            $this->cdMessage = Controller::MESSAGE_DANGER;
+            if($ex->getCode() == 23000){
+                if(strpos($ex->getMessage(), 'constraint violation')){
+                    $this->message = "Já existe um convite para esse usuário!";
+                }
+            }
+            else{
+                $this->message = $ex->getMessage();
+            }
+        }
+    }
 }

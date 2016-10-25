@@ -171,4 +171,21 @@ class Usuarios extends Controller{
             $this->message = $ex->getMessage();
         }
     }
+    
+    public function findByLogin($object) {
+        try {
+            $r = UsuariosDAO::findByColumns(['login' => $object->login]);
+
+            if(empty($r)){
+                throw new Exception("Usuário inexistente.");
+            }
+
+            $usuario = $r[0];
+            unset($usuario->senha);
+            $this->object = $usuario;
+        } catch (Exception $ex) {
+            $this->cdMessage = Controller::MESSAGE_DANGER;
+            $this->message = $ex->getMessage();
+        }
+    }
 }
