@@ -5,7 +5,10 @@
 <link href="../../assets/external/data-tables-responsive/css/responsive.bootstrap.min.css" rel="stylesheet" type="text/css"/>
 
 <style>
-
+    .foto-usuario{
+        max-width: 48px;
+        height: auto;
+    }
 </style>
 
 <div class="name-page">Detalhes do Grupo</div>
@@ -28,6 +31,7 @@
             <thead>
                 <tr>
                     <th class="aln-center"><i class="fa fa-trophy"></i></th>
+                    <th class="aln-center"></th>
                     <th class="aln-center">Membro</th>
                     <th class="aln-center">Desde</th>
                     <th class="aln-center">Pontos</th>
@@ -53,6 +57,7 @@
                cellspacing="0" width="100%">
             <thead>
                 <tr>
+                    <th class="aln-center"></th>
                     <th class="aln-center">Usuário</th>
                     <th class="aln-center">Login</th>
                     <th class="aln-center">Dt Solicitação</th>

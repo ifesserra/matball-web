@@ -21,7 +21,7 @@ class SolicitacoesDAO extends Crud{
     
     public static function getAllByGroup($grupo_id){
         return parent::sqlFetchAll(
-                "SELECT u.id AS id, u.nome AS nome, u.login AS login, ".
+                "SELECT u.id AS id, u.nome AS nome, u.login AS login, u.url_foto AS foto,".
                 "  DATE_FORMAT(dthr_solicitacao, '%Y-%m-%d') AS dt_solicitacao ".
                 "FROM solicitacoes as s ".
                 "INNER JOIN usuarios AS u ".

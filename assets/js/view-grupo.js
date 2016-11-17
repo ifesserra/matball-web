@@ -20,6 +20,9 @@ function loadTbUsers(usuario_id, grupo_id){
                 function (row, o){
                     row.append($("<td class='aln-center text-highlight'>" + (posicao++) + "</td>"));
 
+                    row.append($("<td class='aln-center'><img class='foto-usuario' src='../../" + 
+                            o.membro_foto + "'></td>"));
+                    
                     row.append($("<td class='aln-center'>" + o.membro_login + "</td>"));
 
                     row.append($("<td class='aln-center' data-order='" + 
@@ -42,7 +45,7 @@ function loadTbUsers(usuario_id, grupo_id){
                 }
             );
 
-            dataTableUsers = toDataTable('#tbUsers', {orderable: false, "targets": 7}, [ 0, "asc" ]);
+            dataTableUsers = toDataTable('#tbUsers', {orderable: false, "targets": [1,8]}, [ 0, "asc" ]);
         },
         function (){}
     );
@@ -58,6 +61,8 @@ function loadTbRequests(grupo_id){
         function(r){
             loadListTable(null, '#tbRequests', r.object, 
                 function (row, o){
+                    row.append($("<td class='aln-center'><img class='foto-usuario' src='../../" + 
+                            o.foto + "'></td>"));
                     row.append($("<td class='aln-center text-highlight'>" + o.nome + "</td>"));
                     row.append($("<td class='aln-center text-highlight'>" + o.login + "</td>"));
 
@@ -77,7 +82,7 @@ function loadTbRequests(grupo_id){
                 }
             );
 
-            dataTableRequests = toDataTable('#tbRequests', {orderable: false, "targets": 3}, [ 2, "asc" ]);
+            dataTableRequests = toDataTable('#tbRequests', {orderable: false, "targets": [0,4]}, [ 2, "asc" ]);
             
             $("[accept]").click(function (){
                 confirmActionRequest("Aceitar a solicitação desse usuário?", "accept",
