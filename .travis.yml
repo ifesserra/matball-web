@@ -13,7 +13,6 @@ addons:
     packages:
       - oracle-java8-installer
   sonarqube: true
-   srcclr: true
 
 before_script:
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
@@ -25,6 +24,3 @@ script:
 notifications:
     email: false
     slack: vlouzada-vvidigal:MgvOM0vlrNNiBBfMOJJWE8Jp
-    
-  
- 
