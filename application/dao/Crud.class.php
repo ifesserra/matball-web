@@ -53,18 +53,18 @@ abstract class Crud{
     }
     
     public static function findById($arrayPkValue, $isJson = false){
-        $sql = "SELECT * FROM static::$table WHERE self::makeLogicalExpression($arrayPkValue)";
+        $sql = "SELECT * FROM ". static::$table ." WHERE ". self::makeLogicalExpression($arrayPkValue);
         return self::sqlFetch($sql, $isJson);
     }
     
     public static function findAll($isJson = false){
-        $sql = "SELECT * FROM static::$table";
+        $sql = "SELECT * FROM ". static::$table;
         return self::sqlFetchAll($sql, $isJson);
     }
     
     // Retorna o número de linhas afetadas
     public static function delete($arrayPkValue){
-        $sql = "DELETE FROM static::$table WHERE self::makeLogicalExpression($arrayPkValue)";
+        $sql = "DELETE FROM ". static::$table ." WHERE ". self::makeLogicalExpression($arrayPkValue);
         $qtdRows = self::sqlExec($sql);
 
         if($qtdRows == 0){
@@ -77,7 +77,7 @@ abstract class Crud{
     // Métodos de pesquisa
     
     public static function findByColumns($arrayColValue, $isJson = false){
-        $sql = "SELECT * FROM static::$table WHERE self::makeLogicalExpression($arrayColValue)";
+        $sql = "SELECT * FROM ". static::$table ." WHERE ". self::makeLogicalExpression($arrayColValue);
         return self::sqlFetchAll($sql, $isJson);
     }
     
