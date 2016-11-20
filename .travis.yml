@@ -21,7 +21,6 @@ before_script:
 sonarqube:
     branches:
       - master
-      - desenv-vlouzada
 
 script: 
  - phpunit tests/Teste.php
