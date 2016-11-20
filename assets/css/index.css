@@ -1,0 +1,119 @@
+body, html {
+    overflow: hidden;
+}
+
+#bg{ 
+    position: fixed; 
+    top: 0; left: 0; 
+}
+
+.shape-position{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.shape-back{
+    z-index: 1;
+    opacity: 0.0;
+}
+
+.shape{
+    z-index: 2;
+    text-align: center;
+}
+
+@media screen and (max-width: 500px) {
+    .shape-back-sizes{
+        width: 350px;
+        height: 250px;
+        margin-top: -125px;
+        margin-left: -175px;
+    }
+
+    #imgLogotipo{
+        padding-top: 30px;
+        content: url('../img/logotipo_256.png');
+    }
+
+    #divBtns a {
+        width: 80px;
+    }
+
+    #divBtns a label{
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 501px) {
+    .shape-back-sizes{
+        width: 500px;
+        height: 260px;
+        margin-top: -130px;
+        margin-left: -250px;
+    }
+
+    #imgLogotipo{
+        padding-top: 30px;
+        content: url('../img/logotipo_400.png');
+    }
+
+    #divBtns a label{
+        font-size: 16px;
+    }
+
+    #divBtns a {
+        width: 120px;
+    }
+}
+
+.shape div {
+    width: 100%;
+    text-align: center;
+}
+.shape div h1{
+    color: #ddd;
+    font-size: 20px;
+    font-family: Arial;
+    font-weight: bold;
+}
+
+#divBtns{
+    padding-top: 30px;
+}
+
+#divBtns a{
+    margin: 0 2px 0 2px;
+    opacity: 1.0;
+    background-color: #fff;
+    border: 2px solid #fff;
+    box-shadow: -2px 2px 5px #198f90;
+}
+
+#divBtns a:hover{
+    border: 2px solid #198f90;
+    opacity: 0.9;
+}
+
+#divBtns a label{
+    color: #198f90;
+    padding: 0;
+    margin: 0;
+}
+
+#divLogin{
+    padding-top: 10px;
+}
+
+#loginform{
+    margin-top: 50px;
+}
+
+.input-login{
+    padding: 0 50px 0 50px;
+    margin-bottom: 10px;
+}
+
+#divLogin h2, #divLogin .checkbox label{
+    color: #fff;
+}
