@@ -12,7 +12,7 @@
 <form class="form-horizontal">
     <div class="row form-group">
         <input cmp-post='int' id="id" type="hidden"
-            value="<?php echo(RestrictedSession::getID()) ?>">
+            value="<?php echo RestrictedSession::getID() ?>">
         
         <div class="col-xs-12">
             <label for="nome">Nome</label>

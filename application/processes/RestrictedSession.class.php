@@ -5,8 +5,9 @@ require_once "$ROOT/application/dao/UsuariosDAO.class.php";
 class RestrictedSession{
     
     public static function start(){
-        if(!isset($_SESSION))
+        if(!isset($_SESSION)){
             session_start();
+        }
     }
     
     public static function destroy(){
@@ -15,8 +16,9 @@ class RestrictedSession{
 
     public static function isLogged(){
         self::start();
-        if(isset($_SESSION['id']) && isset($_SESSION['senha']))
+        if(isset($_SESSION['id']) && isset($_SESSION['senha'])){
             return true;
+        }
         
         self::destroy();
         return false;

@@ -7,9 +7,6 @@ require_once "$ROOT/application/processes/Recordes.class.php";
 require_once "$ROOT/application/Functions.php";
 
 class Diarios extends Controller{
-    function __construct() {
-        parent::__construct();
-    }
     
     public function listByUser($object) {
         $this->object = DiariosDAO::getAllByUser($object->usuario_id);

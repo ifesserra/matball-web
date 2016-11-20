@@ -9,8 +9,8 @@
 
 <div class="row margin-top-100">
     <form class="form-horizontal">
-        <input cmp-post="int" id="usuario_id" type="hidden" value="<?php echo(RestrictedSession::getID()); ?>">
-        <input cmp-post="int" id="grupo_id" type="hidden" value="<?php echo($_GET["id"]); ?>">
+        <input cmp-post="int" id="usuario_id" type="hidden" value="<?php echo RestrictedSession::getID(); ?>">
+        <input cmp-post="int" id="grupo_id" type="hidden" value="<?php echo $_GET["id"]; ?>">
         
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
             <div class="row">
