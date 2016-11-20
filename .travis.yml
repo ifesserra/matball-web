@@ -15,8 +15,8 @@ addons:
   sonarqube: true
 
 sonarqube:
-    branches:
-      - desenv-vlouzada
+    branches :
+    - desenv-vlouzada
 
 before_script:
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
