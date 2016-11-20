@@ -79,11 +79,11 @@
             </div>
 
             <div class="divSubTitulo">
-                <?php echo($recordes->posicao) ?>
+                <?php echo $recordes->posicao ?>
             </div>
             
             <div class="divSubSubTitulo">
-                <?php echo("de " . $recordes->total) ?>
+                <?php echo "de $recordes->total" ?>
             </div>
         </div>
     </div>
@@ -95,11 +95,11 @@
             </div>
 
             <div class="divSubTitulo">
-                <?php echo($recordes->pontos_max) ?>
+                <?php echo $recordes->pontos_max ?>
             </div>
             
             <div class="divSubSubTitulo">
-                <?php echo($recordes->dthr_pontos_max) ?>
+                <?php echo $recordes->dthr_pontos_max ?>
             </div>
         </div>
     </div>
@@ -111,11 +111,11 @@
             </div>
 
             <div class="divSubTitulo">
-                <?php echo($recordes->nivel_max) ?>
+                <?php echo $recordes->nivel_max ?>
             </div>
             
             <div class="divSubSubTitulo">
-                <?php echo($recordes->dthr_nivel_max) ?>
+                <?php echo $recordes->dthr_nivel_max ?>
             </div>
         </div>
     </div>
@@ -142,7 +142,7 @@ if($diarioHoje != null){
                 </div>
 
                 <div class="divSubTitulo">
-                    <?php echo($diarioHoje->posicao) ?>
+                    <?php echo $diarioHoje->posicao ?>
                 </div>
             </div>
         </div>
@@ -154,7 +154,7 @@ if($diarioHoje != null){
                 </div>
 
                 <div class="divSubTitulo">
-                    <?php echo($diarioHoje->pontos_max); ?>
+                    <?php echo $diarioHoje->pontos_max; ?>
                 </div>
             </div>
         </div>
@@ -166,7 +166,7 @@ if($diarioHoje != null){
                 </div>
 
                 <div class="divSubTitulo">
-                    <?php echo($diarioHoje->nivel_max); ?>
+                    <?php echo $diarioHoje->nivel_max; ?>
                 </div>
             </div>
         </div>
@@ -180,11 +180,11 @@ if($diarioHoje != null){
                 </div>
 
                 <div tipo="acerto" class="divSubTituloMenor">
-                    <?php echo($diarioHoje->acertos_adicao); ?>
+                    <?php echo $diarioHoje->acertos_adicao; ?>
                 </div>
 
                 <div tipo="erro" class="divSubTituloMenor">
-                    <?php echo($diarioHoje->erros_adicao); ?>
+                    <?php echo $diarioHoje->erros_adicao; ?>
                 </div>
             </div>
         </div>
@@ -196,11 +196,11 @@ if($diarioHoje != null){
                 </div>
 
                 <div tipo="acerto" class="divSubTituloMenor">
-                    <?php echo($diarioHoje->acertos_subtracao); ?>
+                    <?php echo $diarioHoje->acertos_subtracao; ?>
                 </div>
 
                 <div tipo="erro" class="divSubTituloMenor">
-                    <?php echo($diarioHoje->erros_subtracao); ?>
+                    <?php echo $diarioHoje->erros_subtracao; ?>
                 </div>
             </div>
         </div>
@@ -212,11 +212,11 @@ if($diarioHoje != null){
                 </div>
 
                 <div tipo="acerto" class="divSubTituloMenor">
-                    <?php echo($diarioHoje->acertos_multiplicacao); ?>
+                    <?php echo $diarioHoje->acertos_multiplicacao; ?>
                 </div>
 
                 <div tipo="erro" class="divSubTituloMenor">
-                    <?php echo($diarioHoje->erros_multiplicacao); ?>
+                    <?php echo $diarioHoje->erros_multiplicacao; ?>
                 </div>
             </div>
         </div>
@@ -228,11 +228,11 @@ if($diarioHoje != null){
                 </div>
 
                 <div tipo="acerto" class="divSubTituloMenor">
-                    <?php echo($diarioHoje->acertos_divisao); ?>
+                    <?php echo $diarioHoje->acertos_divisao; ?>
                 </div>
 
                 <div tipo="erro" class="divSubTituloMenor">
-                    <?php echo($diarioHoje->erros_divisao); ?>
+                    <?php echo $diarioHoje->erros_divisao; ?>
                 </div>
             </div>
         </div>
@@ -246,7 +246,7 @@ if($diarioHoje != null){
                 </div>
 
                 <div class="divSubTitulo">
-                    <?php echo($diarioHoje->qtd_jogos); ?>
+                    <?php echo $diarioHoje->qtd_jogos; ?>
                 </div>
             </div>
         </div>
@@ -258,7 +258,7 @@ if($diarioHoje != null){
                 </div>
 
                 <div class="divSubTitulo">
-                    <?php echo($diarioHoje->tempo_total); ?>
+                    <?php echo $diarioHoje->tempo_total; ?>
                 </div>
             </div>
         </div>
@@ -270,7 +270,7 @@ if($diarioHoje != null){
                 </div>
 
                 <div class="divSubTitulo">
-                    <?php echo($diarioHoje->hr_ultimo_jogo); ?>
+                    <?php echo $diarioHoje->hr_ultimo_jogo; ?>
                 </div>
             </div>
         </div>

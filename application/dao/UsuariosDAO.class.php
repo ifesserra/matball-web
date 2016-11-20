@@ -2,6 +2,8 @@
 require_once('Crud.class.php');
 require_once "$ROOT/application/Functions.php";
 
+class UsuarioSaveFotoException extends Exception {}
+
 class UsuariosDAO extends Crud{
     public static $table = 'usuarios';
     
@@ -39,7 +41,7 @@ class UsuariosDAO extends Crud{
             return true;
         }
         
-        return false;
+        throw new UsuarioSaveFotoException('ERRO ao gravar a foto');
     }
     
     public static function insertFoto($id, $base64Img){

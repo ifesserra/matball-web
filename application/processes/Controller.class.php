@@ -32,7 +32,6 @@ abstract class Controller {
         $this->response['message'] = $this->message;
         $this->response['object'] = $this->object;
         
-        $json = json_encode($this->response);
-        return $json;
+        return json_encode($this->response);
     }
 }
