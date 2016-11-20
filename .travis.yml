@@ -19,7 +19,7 @@ before_script:
 
 script: 
  - phpunit tests/Teste.php
- - sonar-scanner
+ - sonar-scanner -Dsonar.login=$SONAR_TOKEN
 
 notifications:
     email: false
