@@ -16,10 +16,11 @@ addons:
 
 before_script:
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+  - export SONARQUBE_SKIPPED=false
 
 script: 
  - phpunit tests/Teste.php
- - sonar-scanner -Dsonar.login=aea1483be831710a0da09da29bb18f97e9f71d3f
+ - sonar-scanner
 
 notifications:
     email: false
