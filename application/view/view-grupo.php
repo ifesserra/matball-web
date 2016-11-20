@@ -16,15 +16,15 @@
 <div class="row">
 
     <div class="col-xs-12 aln-right margin-bottom-15">
-        <a href="convidar.php?id=<?php echo($_GET["id"]); ?>" class="btn btn-primary">
+        <a href="convidar.php?id=<?php echo $_GET["id"]; ?>" class="btn btn-primary">
             <i class="fa fa-user"></i>
             <strong>Convidar usuário</strong>
         </a>
     </div>
     
     <div class="col-xs-12">
-        <input id="usuario_id" type="hidden" value="<?php echo(RestrictedSession::getID()); ?>">
-        <input id="grupo_id" type="hidden" value="<?php echo($_GET["id"]); ?>">
+        <input id="usuario_id" type="hidden" value="<?php echo RestrictedSession::getID(); ?>">
+        <input id="grupo_id" type="hidden" value="<?php echo $_GET["id"]; ?>">
         
         <table id='tbUsers' class="table table-striped table-bordered dt-responsive" 
                cellspacing="0" width="100%">

@@ -20,11 +20,10 @@ try{
 
     $receiver = new Receiver($arrayInput);
     $json = $receiver->process();
-    echo($json);
+    echo $json;
 } catch (Exception $e){
     exit($e->getMessage());
 }
-
 
 class Receiver{
     private $input;
@@ -35,15 +34,13 @@ class Receiver{
     
     public function process(){
         if(!isset($this->input['call'])){
-            throw new Exception('ERRO DE CHAMADA');
+            throw new UnexpectedValueException('ERRO DE CHAMADA');
         }
 
         $call = json_decode($this->input['call']);
 
-        //print_r($call);
-
         if(empty($call) || !(isset($call->service) && isset($call->operation) && isset($call->object))){
-            throw new Exception('ERRO DE PARAMETROS');
+            throw new InvalidArgumentException('ERRO DE PARAMETROS');
         }
 
         include_once './processes/' . $call->service . '.class.php';

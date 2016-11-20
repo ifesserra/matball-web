@@ -5,10 +5,9 @@ require_once "$ROOT/application/dao/SolicitacoesDAO.class.php";
 require_once "$ROOT/application/dao/GruposUsuariosDAO.class.php";
 require_once "$ROOT/application/dao/GruposDAO.class.php";
 
+class SolicitacoesException extends Exception {}
+
 class Solicitacoes extends Controller{
-    function __construct() {
-        parent::__construct();
-    }
     
     public function listByUser($object) {
         $this->object = SolicitacoesDAO::getAllByUser($object->usuario_id);
@@ -16,11 +15,9 @@ class Solicitacoes extends Controller{
     
     public function delete($object) {
         try{
-            if(SolicitacoesDAO::delete([
+            SolicitacoesDAO::delete([
                 'grupo_id' => $object->grupo_id,
-                'usuario_id' => $object->usuario_id]) == 0){
-                throw new Exception("Não foi possível excluir a Solicitação!");
-            }
+                'usuario_id' => $object->usuario_id ]);
 
             $this->cdMessage = Controller::MESSAGE_SUCCESS;
             $this->message = "Solicitação excluída com sucesso!";
@@ -34,7 +31,7 @@ class Solicitacoes extends Controller{
     public function insert($object) {
         try{            
             if(GruposDAO::isMember($object->grupo_id, $object->usuario_id)){
-                throw new Exception("Você já é membro desse grupo!");
+                throw new SolicitacoesException("Você já é membro desse grupo!");
             }
             
             SolicitacoesDAO::insert([
@@ -65,11 +62,9 @@ class Solicitacoes extends Controller{
     
     public function reject($object) {
         try{
-            if(SolicitacoesDAO::delete([
+            SolicitacoesDAO::delete([
                 'grupo_id' => $object->grupo_id,
-                'usuario_id' => $object->usuario_id]) == 0){
-                throw new Exception("ERRO: Não foi possível rejeitar a solicitação!");
-            }
+                'usuario_id' => $object->usuario_id ]);
 
             $this->cdMessage = Controller::MESSAGE_SUCCESS;
             $this->message = "Solicitação rejeitada.";
@@ -84,9 +79,7 @@ class Solicitacoes extends Controller{
     public function accept($object) {
         try{
             if(!GruposDAO::isMember($object->grupo_id, $object->usuario_id)){
-                if(!DB::beginTransaction()){
-                    throw new Exception ("ERRO ao aceitar a solicitação!");
-                }
+                DB::beginTransaction();
                 
                 GruposUsuariosDAO::insert([
                     'grupo_id' => $object->grupo_id,
@@ -95,14 +88,12 @@ class Solicitacoes extends Controller{
                 ]);
             }
             
-            if(SolicitacoesDAO::delete([
+            SolicitacoesDAO::delete([
                 'grupo_id' => $object->grupo_id,
-                'usuario_id' => $object->usuario_id]) == 0){
-                throw new Exception("ERRO: Não foi possível excluir a solicitação!");
-            }
+                'usuario_id' => $object->usuario_id]);
             
-            if(DB::inTransaction() && !DB::commit()){
-                throw new Exception ("ERRO ao aceitar a solicitação!");
+            if(DB::inTransaction()){
+                DB::commit();
             }
 
             $this->cdMessage = Controller::MESSAGE_SUCCESS;

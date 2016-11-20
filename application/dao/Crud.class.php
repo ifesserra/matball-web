@@ -1,6 +1,11 @@
 <?php
 require_once('DB.class.php');
 
+class InsertException extends Exception {}
+class NoRowDeletedException extends Exception {}
+
+define('STRING', 'string');
+
 abstract class Crud{
 
     // Métodos CRUD
@@ -9,7 +14,7 @@ abstract class Crud{
     public static function insert($arrayValue, $returnId = true){
         $strValues = "";
         foreach($arrayValue as $value){
-            if(gettype($value) == 'string'){
+            if(gettype($value) == STRING){
                 $strValues .= "'$value',";
             }
             else if(gettype($value) == 'NULL'){
@@ -35,7 +40,7 @@ abstract class Crud{
             return true;
         }
         else{
-            return NULL;
+            throw new InsertException("ERRO ao realizar o cadastro");
         }
     }
 
@@ -48,25 +53,31 @@ abstract class Crud{
     }
     
     public static function findById($arrayPkValue, $isJson = false){
-        $sql = "SELECT * FROM " . static::$table . " WHERE " . self::makeLogicalExpression($arrayPkValue);
+        $sql = "SELECT * FROM static::$table WHERE self::makeLogicalExpression($arrayPkValue)";
         return self::sqlFetch($sql, $isJson);
     }
     
     public static function findAll($isJson = false){
-        $sql = "SELECT * FROM " . static::$table;
+        $sql = "SELECT * FROM static::$table";
         return self::sqlFetchAll($sql, $isJson);
     }
     
     // Retorna o número de linhas afetadas
     public static function delete($arrayPkValue){
-        $sql = "DELETE FROM " . static::$table . " WHERE " . self::makeLogicalExpression($arrayPkValue);
-        return self::sqlExec($sql);
+        $sql = "DELETE FROM static::$table WHERE self::makeLogicalExpression($arrayPkValue)";
+        $qtdRows = self::sqlExec($sql);
+
+        if($qtdRows == 0){
+            throw new NoRowDeletedException("Nenhum registro excluído");
+        }
+
+        return $qtdRows;
     }
     
     // Métodos de pesquisa
     
     public static function findByColumns($arrayColValue, $isJson = false){
-        $sql = "SELECT * FROM " . static::$table . " WHERE " . self::makeLogicalExpression($arrayColValue);
+        $sql = "SELECT * FROM static::$table WHERE self::makeLogicalExpression($arrayColValue)";
         return self::sqlFetchAll($sql, $isJson);
     }
     
@@ -77,19 +88,24 @@ abstract class Crud{
         $statement->execute();
         
         if($isJson){
-            if($isFethAll)
+            if($isFethAll){
                 $r = $statement->fetchAll(PDO::FETCH_ASSOC);
-            else
+            }
+            else{
                 $r = $statement->fetch(PDO::FETCH_ASSOC);
+            }
             
-            if(!empty($r))
+            if(!empty($r)){
                 $r = json_encode($r);
+            }
         }
         else{
-            if($isFethAll)
+            if($isFethAll){
                 $r = $statement->fetchAll();
-            else
+            }
+            else{
                 $r = $statement->fetch();
+            }
         }
         
         $statement->closeCursor();
@@ -115,7 +131,7 @@ abstract class Crud{
         foreach ($arrayFieldValue as $fild => $value){
             $where .= " $fild=";
             
-            if(gettype($value) == 'string'){
+            if(gettype($value) == STRING){
                 $where .= "'$value' $operator";
             }
             else if(gettype($value) == 'NULL'){
@@ -133,7 +149,7 @@ abstract class Crud{
         $attributions = "";
         
         foreach($arrayFieldValue as $fild => $value){            
-            if(gettype($value) == 'string'){
+            if(gettype($value) == STRING){
                 $attributions .= "$fild='$value',";
             }
             else if(gettype($value) == 'NULL'){

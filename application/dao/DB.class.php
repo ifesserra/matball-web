@@ -2,6 +2,8 @@
 $ROOT = dirname(__DIR__, 2);
 require_once "$ROOT/config/db.php";
 
+class TransactionException extends Exception {}
+
 class DB{
     private static $instance;
     
@@ -27,7 +29,6 @@ class DB{
     }
     
     public static function prepare($sql){
-        //echo("$sql<BR>");
         return self::getInstance()->prepare($sql);
     }
     
@@ -40,7 +41,11 @@ class DB{
     }
     
     public static function beginTransaction(){
-        return self::getInstance()->beginTransaction();
+        if(!self::getInstance()->beginTransaction()){
+            throw new TransactionException("Erro ao iniciar a operação");
+        }
+
+        return true;
     }
     
     public static function inTransaction(){
@@ -48,10 +53,18 @@ class DB{
     }
     
     public static function commit(){
-        return self::getInstance()->commit();
+        if(!self::getInstance()->commit()){
+            throw new TransactionException("Erro ao consolidar a operação");
+        }
+
+        return true;
     }
     
     public static function rollBack(){
-        return self::getInstance()->rollBack();
+        if(!self::getInstance()->rollBack()){
+            throw new TransactionException("Erro ao cancelar a operação");
+        }
+
+        return true;
     }
 }

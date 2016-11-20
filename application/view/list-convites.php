@@ -16,7 +16,7 @@
     
     <div class="col-xs-12">
         <input id="usuario_id" type="hidden"
-               value="<?php echo(RestrictedSession::getID()) ?>">
+               value="<?php echo RestrictedSession::getID() ?>">
         
         <table id='listTable' class="table table-striped table-bordered dt-responsive" 
                cellspacing="0" width="100%">

@@ -5,10 +5,9 @@ require_once "$ROOT/application/dao/ConvitesDAO.class.php";
 require_once "$ROOT/application/dao/GruposUsuariosDAO.class.php";
 require_once "$ROOT/application/dao/GruposDAO.class.php";
 
+class ConvitesException extends Exception {}
+
 class Convites extends Controller{
-    function __construct() {
-        parent::__construct();
-    }
     
     public function listByUser($object) {
         $this->object = ConvitesDAO::getAllByUser($object->usuario_id);
@@ -16,11 +15,9 @@ class Convites extends Controller{
     
     public function reject($object) {
         try{
-            if(ConvitesDAO::delete([
+            ConvitesDAO::delete([
                 'grupo_id' => $object->grupo_id,
-                'usuario_id' => $object->usuario_id]) == 0){
-                throw new Exception("ERRO: Não foi possível rejeitar o convite!");
-            }
+                'usuario_id' => $object->usuario_id ]);
 
             $this->cdMessage = Controller::MESSAGE_SUCCESS_EMPTY;
             
@@ -33,9 +30,7 @@ class Convites extends Controller{
     public function accept($object) {
         try{
             if(!GruposDAO::isMember($object->grupo_id, $object->usuario_id)){
-                if(!DB::beginTransaction()){
-                    throw new Exception ("ERRO ao entrar no grupo!");
-                }
+                DB::beginTransaction();
                 
                 GruposUsuariosDAO::insert([
                     'grupo_id' => $object->grupo_id,
@@ -44,14 +39,12 @@ class Convites extends Controller{
                 ]);
             }
             
-            if(ConvitesDAO::delete([
+            ConvitesDAO::delete([
                 'grupo_id' => $object->grupo_id,
-                'usuario_id' => $object->usuario_id]) == 0){
-                throw new Exception("ERRO: Não foi possível excluir o convite!");
-            }
+                'usuario_id' => $object->usuario_id ]);
             
-            if(DB::inTransaction() && !DB::commit()){
-                throw new Exception ("ERRO ao entrar no grupo!");
+            if(DB::inTransaction()){
+                DB::commit();
             }
 
             $this->cdMessage = Controller::MESSAGE_SUCCESS;
@@ -70,7 +63,7 @@ class Convites extends Controller{
     public function insert($object) {
         try{
             if(GruposDAO::isMember($object->grupo_id, $object->usuario_id)){
-                throw new Exception("Esse usuário já é membro do grupo!");
+                throw new ConvitesException("Esse usuário já é membro do grupo!");
             }
             
             ConvitesDAO::insert([
@@ -85,6 +78,7 @@ class Convites extends Controller{
             
         } catch (Exception $ex){
             $this->cdMessage = Controller::MESSAGE_DANGER;
+
             if($ex->getCode() == 23000){
                 if(strpos($ex->getMessage(), 'constraint violation')){
                     $this->message = "Já existe um convite para esse usuário!";
