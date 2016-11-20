@@ -23,7 +23,7 @@ class RestrictedSession{
     }
     
     public static function login($user, $pass){
-        $row = UsuariosDAO::findByUserPass($user, $pass);
+        $row = UsuariosDAO::findByUserPass($user, sha1($pass));
 
         if(empty($row)){
             return false;

@@ -6,7 +6,16 @@ class UsuariosDAO extends Crud{
     public static $table = 'usuarios';
     
     public static function findByUserPass($user, $pass){
-        $r = parent::findByColumns(['login' => $user, 'senha' => sha1($pass)]);
+        $r = parent::findByColumns(['login' => $user, 'senha' => $pass]);
+        if(!empty($r)){
+            return $r[0];
+        }
+        
+        return null;
+    }
+
+    public static function findByIdPass($user, $pass){
+        $r = parent::findByColumns(['id' => $user, 'senha' => $pass]);
         if(!empty($r)){
             return $r[0];
         }

@@ -188,4 +188,16 @@ class Usuarios extends Controller{
             $this->message = $ex->getMessage();
         }
     }
+
+    public function validateUserPass($object) {
+        $usuario = UsuariosDAO::findByUserPass($object->user, $object->hash_pass);
+
+        if(empty($usuario)){
+            $this->cdMessage = Controller::MESSAGE_DANGER;
+            $this->message = "Usuário ou senha inválido.";
+        }
+        else{
+            $this->object['usuario_id'] = intval($usuario->id);
+        }
+    }
 }
