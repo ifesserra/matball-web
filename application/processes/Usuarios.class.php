@@ -7,10 +7,15 @@ require_once "$ROOT/application/dao/UsuariosDAO.class.php";
 require_once "$ROOT/application/dao/LocaisDAO.class.php";
 require_once "$ROOT/application/dao/RecordesDAO.class.php";
 
-class Usuarios extends Controller{
-    function __construct() {
-        parent::__construct();
+class UsuarioNotFoundException extends Exception {
+    function __construct(){
+        parent::__construct("Usuário inexistente.");
     }
+}
+
+class UsuarioInvalidPassException extends Exception {}
+
+class Usuarios extends Controller{
     
     public function login($object) {
         if(RestrictedSession::login($object->user, $object->password)){
@@ -31,20 +36,13 @@ class Usuarios extends Controller{
     
     public function insert($object) {
         try {
-            if(!DB::beginTransaction()){
-                throw new Exception ("ERRO ao iniciar o cadastro");
-            }
+            DB::beginTransaction();
 
             $local = LocaisDAO::getIdByColumns($object->pais, $object->estado, $object->cidade);
 
             if(empty($local)){
                 $local_id = LocaisDAO::insert([
-                    null, $object->pais, $object->estado, $object->cidade
-                ]);
-
-                if(empty($local_id)){
-                    throw new Exception("ERRO ao cadastrar endereço");
-                }
+                    null, $object->pais, $object->estado, $object->cidade ]);
             }
             else{
                 $local_id = $local->id;
@@ -55,15 +53,11 @@ class Usuarios extends Controller{
                 Functions::date2sqlDate($object->dt_nascimento), '', $local_id,
                 $object->escola, $object->tipo_escola, Functions::sqlCurrentTimeStamp()]);
 
-            if(empty($id) || RecordesDAO::insert([$id, 0, 0, 0, 0], false) == NULL){
-                throw new Exception("ERRO ao realizar o cadastro");
-            }
+            RecordesDAO::insert([$id, 0, 0, 0, 0], false);
 
             UsuariosDAO::insertFoto($id, $object->base64Img);
             
-            if(!DB::commit()){
-                throw new Exception ("Erro ao efetivar o cadastro.");
-            }
+            DB::commit();
 
             $this->cdMessage = Controller::MESSAGE_SUCCESS;
             $this->message = "Seu cadastro foi realizado com sucesso, realize login!";
@@ -93,32 +87,26 @@ class Usuarios extends Controller{
         try {
             $usuario = UsuariosDAO::findByIdJoinLocal($object->id);
             if(empty($usuario)){
-                throw new Exception("Usuário inexistente.");
+                throw new UsuarioNotFoundException();
             }
             
             $arrayDataUpdate = [];
             if(!empty($object->senha_nova)){
                 if(sha1($object->senha_atual) != $usuario->senha){
-                    throw new Exception ("Senha atual incorreta.");
+                    throw new UsuarioInvalidPassException ("Senha atual incorreta.");
                 }
                 
                 $arrayDataUpdate['senha'] = sha1($object->senha_nova);
             }
             
-            if(!DB::beginTransaction()){
-                throw new Exception ("ERRO ao iniciar a atualização");
-            }
+            DB::beginTransaction();
             
             if($usuario->pais != $object->pais || $usuario->estado != $object->estado || $usuario->cidade != $object->cidade){
                 $local = LocaisDAO::getIdByColumns($object->pais, $object->estado, $object->cidade);
 
                 if(empty($local)){
                     $arrayDataUpdate['local_id'] = LocaisDAO::insert([
-                        null, $object->pais, $object->estado, $object->cidade]);
-
-                    if(empty($arrayDataUpdate['local_id'])){
-                        throw new Exception("ERRO ao atualizar endereço");
-                    }
+                        null, $object->pais, $object->estado, $object->cidade ]);
                 }
                 else{
                     $arrayDataUpdate['local_id'] = $local->id;
@@ -133,14 +121,10 @@ class Usuarios extends Controller{
             UsuariosDAO::update(['id' => $object->id], $arrayDataUpdate);
             
             if(!empty($object->base64Img)){
-                if(!UsuariosDAO::saveFoto($object->id . '.png', $object->base64Img)){
-                    throw new Exception("ERRO ao gravar a foto de perfil.");
-                }
+                UsuariosDAO::saveFoto($object->id . '.png', $object->base64Img);
             }
             
-            if(!DB::commit()){
-                throw new Exception ("Erro ao efetivar a atualização.");
-            }
+            DB::commit();
 
             $this->cdMessage = Controller::MESSAGE_SUCCESS;
             $this->message = "Seu cadastro foi atualizado com sucesso.";
@@ -161,7 +145,7 @@ class Usuarios extends Controller{
             $usuario = UsuariosDAO::findByIdJoinLocal($object->id);
 
             if(empty($usuario)){
-                throw new Exception("Usuário inexistente.");
+                throw new UsuarioNotFoundException();
             }
 
             unset($usuario->senha);
@@ -177,7 +161,7 @@ class Usuarios extends Controller{
             $r = UsuariosDAO::findByColumns(['login' => $object->login]);
 
             if(empty($r)){
-                throw new Exception("Usuário inexistente.");
+                throw new UsuarioNotFoundException();
             }
 
             $usuario = $r[0];

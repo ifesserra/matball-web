@@ -63,7 +63,7 @@
         <div class="col-xs-12 col-sm-8 col-md-10">
             <div class="row">
                 <input cmp-post='int' id="id" type="hidden"
-                       value="<?php echo(RestrictedSession::getID()) ?>">
+                       value="<?php echo RestrictedSession::getID() ?>">
                 
                 <div class="col-xs-12 col-sm-8 col-md-10">
                     <label for="nome">Nome</label>

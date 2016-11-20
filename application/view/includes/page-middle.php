@@ -4,8 +4,8 @@
         <div id="sidebar-wrapper">
             
             <div class="div-perfil">
-                <img src="../../<?php echo(RestrictedSession::getUrlFoto()) ?>" alt="Foto de Perfil"/>
-                <label id="lblLogin"><?php echo(RestrictedSession::getLogin()) ?></label>
+                <img src="../../<?php echo RestrictedSession::getUrlFoto() ?>" alt="Foto de Perfil"/>
+                <label id="lblLogin"><?php echo RestrictedSession::getLogin() ?></label>
             </div>
             
             <ul class="sidebar-nav">
