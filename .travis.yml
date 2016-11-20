@@ -6,6 +6,10 @@ php:
     - 7.0
     - hhvm
 
+sonarqube:
+    branches:
+      - desenv-vlouzada
+
 jdk:
   - oraclejdk8
 addons:
@@ -13,10 +17,6 @@ addons:
     packages:
       - oracle-java8-installer
   sonarqube: true
-
-sonarqube:
-    branches :
-    - desenv-vlouzada
 
 before_script:
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
