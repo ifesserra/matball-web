@@ -13,11 +13,13 @@ addons:
     packages:
       - oracle-java8-installer
   sonarqube: true
-    branches:
-      - desenv-vlouzada
 
 before_script:
   - export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+
+sonarqube:
+    branches:
+      - desenv-vlouzada
 
 script: 
  - phpunit tests/Teste.php
